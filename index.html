@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Likitha Majji - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & fonts */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navigation */
+    nav {
+      background: #161b22;
+      color: #c9d1d9;
+      padding: 1rem 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 0 15px #00000088;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav__logo a {
+      color: #58a6ff;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+    .nav__links a {
+      font-weight: 500;
+      margin-left: 1.8rem;
+      transition: color 0.3s ease;
+    }
+    .nav__links a:hover {
+      color: #58a6ff;
+    }
+    #menu-btn {
+      display: none;
+      font-size: 2rem;
+      color: #58a6ff;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      #menu-btn {
+        display: block;
+      }
+      .nav__links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        background: #161b22;
+        width: 200px;
+        height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding: 2rem 1rem;
+        gap: 1rem;
+        transition: right 0.3s ease;
+        border-radius: 0 0 0 12px;
+        z-index: 99;
+      }
+      .nav__links.show {
+        right: 0;
+      }
+      .nav__links a {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Header & animated background */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+    .animated-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.7;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    .blob1 {
+      width: 300px; height: 300px;
+      background: #4a90e2;
+      top: -100px;
+      left: -100px;
+      animation-name: blobMove1;
+      animation-duration: 10s;
+    }
+    .blob2 {
+      width: 350px; height: 350px;
+      background: #50e3c2;
+      top: 150px;
+      right: -150px;
+      animation-name: blobMove2;
+      animation-duration: 12s;
+    }
+    .blob3 {
+      width: 250px; height: 250px;
+      background: #f5a623;
+      bottom: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-name: blobMove3;
+      animation-duration: 14s;
+    }
+    @keyframes blobMove1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, 50px); }
+    }
+    @keyframes blobMove2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-40px, -40px); }
+    }
+    @keyframes blobMove3 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(40px, 40px); }
+    }
+
+    /* Header content */
+    .header__container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 1200px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .header__content {
+      flex: 1 1 500px;
+      max-width: 600px;
+    }
+    .header__content h1 {
+      font-size: 3.5rem;
+      color: #58a6ff;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.2s;
+    }
+    .header__content h2 {
+      font-weight: 600;
+      font-size: 1.6rem;
+      margin: 0.2rem 0;
+      color: #8b949e;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.4s;
+    }
+    .header__content h3 {
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.6s;
+      color: #c9d1d9cc;
+    }
+    .header__content p {
+      max-width: 470px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #c9d1d9cc;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 0.8s;
+    }
+    .header__btns .btn {
+      background: linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%);
+      border: none;
+      padding: 0.9rem 2.5rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      color: white;
+      margin-right: 1rem;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 1s;
+      transition: background 0.3s ease;
+      box-shadow: 0 8px 15px rgba(24, 144, 255, 0.3);
+    }
+    .header__btns .btn:hover {
+      background: linear-gradient(90deg, #1f6feb, #58a6ff);
+      box-shadow: 0 12px 25px rgba(24, 144, 255, 0.6);
+    }
+
+    /* Image on right side */
+    .header__img {
+      flex: 1 1 400px;
+      max-width: 450px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 1.2s;
+      filter: drop-shadow(0 0 15px #58a6ffaa);
+    }
+    .header__img img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    /* Fade in keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section styling */
+    section {
+      padding: 5rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2.section__header {
+      font-size: 2.5rem;
+      color: #58a6ff;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    /* Info lists styling */
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 700px;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      color: #c9d1d9cc;
+    }
+    .info-list li {
+      margin-bottom: 0.8rem;
+    }
+    .info-list strong {
+      color: #58a6ff;
+    }
+
+    /* Projects container */
+    .projects__container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+    }
+    .project__card {
+      background: #161b22;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgb(88 166 255 / 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #c9d1d9;
+    }
+    .project__card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgb(88 166 255 / 0.7);
+    }
+    .project__card h3 {
+      margin-top: 0;
+      color: #58a6ff;
+    }
+    .project__card p {
+      font-size: 1rem;
+      color: #c9d1d9cc;
+    }
+
+    /* Contact section */
+    .contact__container p {
+      font-size: 1.1rem;
+      color: #8b949e;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+    .contact__container i {
+      color: #58a6ff;
+      margin-right: 0.8rem;
+      font-size: 1.3rem;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #161b22;
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav__logo"><a href="#home">Likitha Majji</a></div>
+    <div id="menu-btn">&#9776;</div>
+    <div class="nav__links" id="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Header / Home -->
+  <header id="home">
+    <div class="animated-bg">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+    </div>
+
+    <div class="header__container">
+      <div class="header__content">
+        <h1>Likitha Majji</h1>
+        <h2>Computer Science Engineering Student | Full Stack Developer | Data Analyst</h2>
+        <p>
+          Motivated Computer Science undergraduate with hands-on experience in full-stack web development, AI-driven applications, and creative digital content. Proven ability to design scalable, user-centric solutions and contribute to cross-functional projects. Eager to grow as a Software Engineer or Frontend Developer, leveraging strong problem-solving and communication skills.
+        </p>
+      </div>
+      <div class="header__img">
+        <!-- You can replace this with your actual photo -->
+        <img src="likitha.jpeg" alt="Likitha Majji" />
+      </div>
+    </div>
+  </header>
+
+<!-- About Section -->
+  <section id="about">
+    <h2 class="section__header">About Me</h2>
+    <ul class="info-list">
+      <li><strong>College:</strong> Amrita Vishwa Vidyapeetham</li>
+      <li><strong>Branch:</strong> Computer Science Engineering (CSE)</li>
+      <li><strong>Current Semester:</strong> 8th Semester</li>
+      <li><strong>Additional Info:</strong> Took a 2-year break (2020-2022) to prepare for IIT JEE</li>
+      <li><strong>Hobbies:</strong> Editing and Dancing</li>
+    </ul>
+  </section>
+
+<!-- Skills Section -->
+  <section id="skills">
+  <h2 class="section__header">Skills</h2>
+  <ul class="info-list">
+    <li><strong>Programming Languages:</strong> Python, C</li>
+    <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+    <li><strong>Backend & Tools:</strong> Node.js, GitHub, VS Code</li>
+    <li><strong>Database & Cloud:</strong> MySQL, AWS</li>
+    <li><strong>Soft Skills:</strong> Communication, Problem Solving, Adaptability, Teamwork</li>
+  </ul>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+  <h2 class="section__header">Projects</h2>
+  <div class="projects__container">
+    <div class="project__card">
+      <h3>HealthQ – Doctor Appointment Optimization</h3>
+      <p>Developed a multi-page web application with features like appointment scheduling, calendar view, ratings, pharmacy locator, and chatbot assistance using HTML, CSS, and JavaScript.</p>
+    </div>
+    <div class="project__card">
+      <h3>Multi-Class Skin Cancer Classification — AI-based Diagnostic Model</h3>
+      <p>Developed a hybrid deep learning model integrating ResNet50 and handcrafted features to classify seven skin lesion types using the HAM10000 dataset. Achieved 15% higher precision and improved explainability through feature fusion, data augmentation, and Grad-CAM visualization. <br><br><strong>Technologies:</strong> Python, ResNet50, Vision Transformer (ViT), GLCM, LBP, PCA, Grad-CAM (July 2026 – Nov 2026)</p>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications Section (added as extra activities section) -->
+<section id="certifications">
+  <h2 class="section__header">Certifications & Achievements</h2>
+  <ul class="info-list">
+    <li>🏆 <strong>2nd Place</strong> – Kurukshetra Hackathon 2025, ITM University<br>
+  Developed an AI-based Doctor Appointment Optimizer using HTML, CSS, and JavaScript.</li>
+  <li>🎯 <strong>Finalist</strong> in 6+ National Hackathons focused on AI, healthcare, and e-commerce innovation.</li>
+  </ul>
+</section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2 class="section__header">Contact</h2>
+    <div class="contact__container">
+      <p><i>📞</i> +91-9493447064</p>
+      <p><i>📧</i> <a href="mailto:likithamajji5@gmail.com" style="color:#58a6ff;">likithamajji5@gmail.com</a></p>
+      <p><i>📍</i> Visakahapatnam</p>
+      <p><i>🌐</i> <a href="https://github.com/likitha041" target="_blank" rel="noopener" style="color:#58a6ff;">GitHub Profile</a></p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Likitha Majji. All rights reserved.
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    // Close menu when link clicked (mobile)
+    document.querySelectorAll('.nav__links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+      });
+    });
+
+    // Simple fade-in on scroll for sections
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
